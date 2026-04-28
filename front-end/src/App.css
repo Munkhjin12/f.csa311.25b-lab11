@@ -1,47 +1,165 @@
-#board {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: #2196F3;
-  padding: 10px
-}
-
-.cell {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  height: 25vmin;
-  text-align: center;
-}
-
-#bottombar {
-  height: 5vh;
-}
-
-#instructions {
-  height: 5vh;
-  background-color: white;
-  padding: 0px;
-  margin: 0px;
-  text-align: center;
-  border: 1px solid black;
-}
-
-#bottombar button {
-  width: 50%;
-  /* height: 100%; */
-  margin: 0;
-  padding: 0;
-  position: relative;
-  float: left;
-  font-size: 2vw
-}
-
-html,
-body {
+/* === Global Reset === */
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
 }
 
-.playable { background-color: red;}
+/* === App Container === */
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* === Title === */
+#title {
+  color: #e0e0e0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  text-shadow: 0 0 20px rgba(100, 200, 255, 0.5);
+}
+
+/* === Instructions Bar === */
+#instructions {
+  width: 360px;
+  padding: 12px 20px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+#instructions.winner {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 165, 0, 0.3));
+  border-color: #ffd700;
+  color: #ffd700;
+  font-size: 1.4rem;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+  to   { box-shadow: 0 0 30px rgba(255, 215, 0, 0.7); }
+}
+
+/* === Board === */
+#board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* === Cells === */
+.cell {
+  width: 110px;
+  height: 110px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffffff;
+  transition: background 0.2s ease, transform 0.1s ease;
+  cursor: default;
+  box-sizing: border-box;
+}
+
+/* X = blue, O = red */
+.cell-X {
+  color: #64b5f6;
+  text-shadow: 0 0 15px rgba(100, 181, 246, 0.6);
+}
+
+.cell-O {
+  color: #ef9a9a;
+  text-shadow: 0 0 15px rgba(239, 154, 154, 0.6);
+}
+
+.playable {
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.playable:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+a {
+  text-decoration: none;
+}
+
+/* === Bottom Bar === */
+#bottombar {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  width: 360px;
+}
+
+#bottombar button {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+#bottombar button:first-child {
+  background: linear-gradient(135deg, #43a047, #2e7d32);
+  color: white;
+  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
+}
+
+#bottombar button:first-child:hover {
+  background: linear-gradient(135deg, #66bb6a, #43a047);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(67, 160, 71, 0.5);
+}
+
+#bottombar button:last-child {
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+  color: white;
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
+}
+
+#bottombar button:last-child:hover {
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(21, 101, 192, 0.5);
+}
+
+#bottombar button:active {
+  transform: translateY(0px);
+}

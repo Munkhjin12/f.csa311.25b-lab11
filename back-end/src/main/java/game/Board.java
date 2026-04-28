@@ -9,7 +9,7 @@ public class Board {
 
     public Board() {
         this(IntStream.range(0, 9).mapToObj(i -> null)
-                .collect(Collectors.toList()).toArray(new Player[0]));
+                .collect(Collectors.toList()).toArray(Player[]::new));
     }
 
     public Board(Player[] cells) {
