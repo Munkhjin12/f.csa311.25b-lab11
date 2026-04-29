@@ -163,3 +163,9 @@ a {
 #bottombar button:active {
   transform: translateY(0px);
 }
+
+#bottombar button:disabled {
+  background-color: #95a5a6 !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}

@@ -75,7 +75,7 @@ class App extends React.Component<Props, GameState> {
         </div>
         <div id="bottombar">
           <button onClick={this.newGame}>🔄 Шинэ тоглоом</button>
-          <button onClick={this.undo}>↩ Буцаах</button>
+          <button onClick={this.undo} disabled={this.state.winner !== null}>↩ Буцаах</button>
         </div>
       </div>
     );
