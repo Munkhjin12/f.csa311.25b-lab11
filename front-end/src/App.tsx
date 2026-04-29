@@ -56,9 +56,20 @@ class App extends React.Component<Props, GameState> {
     }
   }
 
+  isBoardFull(): boolean {
+    return this.state.cells.every(cell => !cell.playable);
+  }
+
+  isTie(): boolean {
+    return !this.state.winner && this.isBoardFull();
+  }
+
   getInstructionText(): string {
     if (this.state.winner) {
       return `🏆 Тоглогч ${this.state.winner} яллаа!`;
+    }
+    if (this.isTie()) {
+      return `🤝 Тэнцсэн!`;
     }
     return `Тоглогч ${this.state.currentPlayer}-ийн ээлж`;
   }
@@ -75,7 +86,7 @@ class App extends React.Component<Props, GameState> {
         </div>
         <div id="bottombar">
           <button onClick={this.newGame}>🔄 Шинэ тоглоом</button>
-          <button onClick={this.undo} disabled={this.state.winner !== null}>↩ Буцаах</button>
+          <button onClick={this.undo} disabled={this.state.winner !== null || this.isTie()}>↩ Буцаах</button>
         </div>
       </div>
     );
